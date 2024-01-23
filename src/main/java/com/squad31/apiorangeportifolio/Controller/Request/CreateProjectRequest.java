@@ -6,6 +6,7 @@ import java.util.Set;
 
 public record CreateProjectRequest(
 
+        String userUuid,
         String title,
         Set<String> tags,
         String description,

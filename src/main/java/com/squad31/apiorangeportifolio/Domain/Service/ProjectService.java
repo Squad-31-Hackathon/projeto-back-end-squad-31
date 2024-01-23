@@ -29,7 +29,8 @@ public class ProjectService {
     }
 
     public Project getById(String uuid){
-        return repository.findById(uuid).get(); //.orElseThrow(); <- quando fizer as exceptions pode botar no lugar do .get()
+        return repository.findById(uuid)
+                         .orElseThrow(IllegalArgumentException::new); // NotFoundException
     }
 
     @Transactional
