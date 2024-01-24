@@ -20,9 +20,9 @@ public class UserService {
 
     public User create(UserRequestDTO userData) {
 
-        Optional<User> userExists = userRepository.findByEmail(userData.email());
+        Boolean userExists = userRepository.existsByEmail(userData.email());
 
-        if (userExists.isPresent()) {
+        if (userExists) {
             throw new BadRequestException("Usuário já cadastrado com este e-mail");
         }
 
