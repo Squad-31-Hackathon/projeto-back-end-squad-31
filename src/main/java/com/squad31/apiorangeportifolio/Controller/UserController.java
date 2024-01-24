@@ -18,13 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<UserResponseDTO> create(@RequestBody UserRequestDTO userData) {
-
-        User user = userService.create(userData);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.mapFromUserToUserResponse(user));
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> findById(@PathVariable String id) {
