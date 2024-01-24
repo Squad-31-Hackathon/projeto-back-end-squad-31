@@ -46,6 +46,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
 
+
         } catch (JWTVerificationException exception) {
             throw new BadRequestException(exception.getMessage());
         }
