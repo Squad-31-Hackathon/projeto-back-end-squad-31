@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Builder
@@ -18,10 +19,13 @@ public class User {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    private String uuid;
+    private UUID uuid;
 
     @Column (name = "name", nullable = false)
     private String name;
+
+    @Column (name = "last_name", nullable = false)
+    private String lastName;
 
     @Column (name = "email", nullable = false)
     private String email;
