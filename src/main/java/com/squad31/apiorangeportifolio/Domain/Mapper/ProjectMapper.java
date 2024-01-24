@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Component
 @Log4j2
@@ -21,7 +22,7 @@ public class ProjectMapper {
 
     public Project mapNewProject(CreateProjectRequest request) {
 
-        User user = userRepository.findById(request.userUuid())
+        User user = userRepository.findById(UUID.fromString(request.userUuid()))
                                   .orElseThrow(IllegalArgumentException::new); // quando criar a NotFoundException põe aqui
 
         byte[] processedImage = new byte[0];
