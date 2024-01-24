@@ -7,6 +7,7 @@ import com.squad31.apiorangeportifolio.Exceptions.BadRequestException;
 import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,17 +21,17 @@ public class UserService {
 
     public User create(UserRequestDTO userData) {
 
-        Boolean userExists = userRepository.existsByEmail(userData.email());
-
-        if (userExists) {
-            throw new BadRequestException("Usuário já cadastrado com este e-mail");
+        if (userRepository.findByEmail(userData.email()) != null) {
+            throw new BadRequestException("Usuário com este email já cadastrado!");
         }
 
-       // TODO: Criptografar senha antes de salvar
+        String hashedPassword = new BCryptPasswordEncoder().encode(userData.password());
 
         User newUser = new User();
 
-        BeanUtils.copyProperties(userData, newUser);
+        BeanUtils.copyProperties(userData, newUser, "password");
+
+        newUser.setPassword(hashedPassword);
 
         return userRepository.save(newUser);
 
