@@ -25,4 +25,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    private ResponseEntity<ErrorDTO> handleIllegalArgumentException(IllegalArgumentException ex) {
+
+        ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
 }
