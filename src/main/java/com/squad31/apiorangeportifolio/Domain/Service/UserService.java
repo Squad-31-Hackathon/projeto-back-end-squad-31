@@ -18,7 +18,7 @@ public class UserService {
     @Autowired
     private  UserRepository userRepository;
 
-    public UserResponseDTO createUser(UserRequestDTO userData) {
+    public User createUser(UserRequestDTO userData) {
 
         Optional<User> userExists = userRepository.findByEmail(userData.email());
 
@@ -32,8 +32,7 @@ public class UserService {
 
         BeanUtils.copyProperties(userData, newUser);
 
-        User savedUser = userRepository.save(newUser);
+        return userRepository.save(newUser);
 
-        return UserMapper.mapFromUserToUserResponse(savedUser);
     }
 }
