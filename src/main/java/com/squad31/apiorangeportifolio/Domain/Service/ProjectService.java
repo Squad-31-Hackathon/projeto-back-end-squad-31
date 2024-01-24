@@ -1,9 +1,10 @@
 package com.squad31.apiorangeportifolio.Domain.Service;
 
-import com.squad31.apiorangeportifolio.Controller.Request.CreateProjectRequest;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
+import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,14 @@ public class ProjectService {
 
     public Project getById(String uuid){
         return repository.findById(uuid)
-                         .orElseThrow(IllegalArgumentException::new); // NotFoundException
+                         .orElseThrow(() -> new NotFoundException("Projeto não encontrado"));
     }
 
     @Transactional
-    public void createNewProject(CreateProjectRequest request){
-        repository.save(mapper.mapNewProject(request));
+    public Project createNewProject(ProjectRequestDTO request){
+        Project newProject = repository.save(mapper.mapNewProject(request));
         log.info("Projeto registrado com sucesso");
+        return newProject;
     }
 
     @Transactional

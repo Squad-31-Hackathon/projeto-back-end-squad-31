@@ -1,10 +1,13 @@
 package com.squad31.apiorangeportifolio.Domain.Mapper;
 
-import com.squad31.apiorangeportifolio.Controller.Request.CreateProjectRequest;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
+import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +23,10 @@ public class ProjectMapper {
     @Autowired
     private UserRepository userRepository;
 
-    public Project mapNewProject(CreateProjectRequest request) {
+    public Project mapNewProject(ProjectRequestDTO request) {
 
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
-                                  .orElseThrow(IllegalArgumentException::new); // quando criar a NotFoundException põe aqui
+                                  .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         byte[] processedImage = new byte[0];
 
@@ -42,6 +45,14 @@ public class ProjectMapper {
                 .image(processedImage)
                 .publishDate(Date.valueOf(LocalDate.now()))
                 .build();
+    }
+
+    public static ProjectResponseDTO mapProjectResponse(Project project){
+
+        ProjectResponseDTO response = null;
+        BeanUtils.copyProperties(project, response);
+
+        return response;
     }
 
 }

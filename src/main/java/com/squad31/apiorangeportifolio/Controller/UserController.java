@@ -1,4 +1,4 @@
-package com.squad31.apiorangeportifolio.Controller.Request;
+package com.squad31.apiorangeportifolio.Controller;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
