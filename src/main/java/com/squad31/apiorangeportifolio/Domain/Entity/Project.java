@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Builder
@@ -20,7 +21,7 @@ public class Project {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    private String uuid;
+    private UUID uuid;
 
     @Column (name = "title", nullable = false)
     private String title;
