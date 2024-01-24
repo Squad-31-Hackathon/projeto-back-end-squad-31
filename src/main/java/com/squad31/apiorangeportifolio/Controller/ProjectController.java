@@ -6,6 +6,7 @@ import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,22 @@ public class ProjectController {
 
     @GetMapping ("/{id}")
     public ResponseEntity<ProjectResponseDTO> getById(@PathVariable String uuid) {
-        Project project = service.getById(uuid)
+        Project project = service.getById(uuid);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(project);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping
+    @GetMapping ("/{tag}")
+    public ResponseEntity<List<ProjectResponseDTO>> getByTag(@PathVariable String tag) {
+        List<ProjectResponseDTO> response = service.getByTag(tag).stream()
+                                                    .map(ProjectMapper::mapProjectResponse)
+                                                    .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping (consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProjectResponseDTO> create(@RequestBody ProjectRequestDTO request){
         Project newProject = service.createNewProject(request);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
