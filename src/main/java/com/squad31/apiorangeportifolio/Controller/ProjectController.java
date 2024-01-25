@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +33,7 @@ public class ProjectController {
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<ProjectResponseDTO> getById(@PathVariable String uuid) {
+    public ResponseEntity<ProjectResponseDTO> getById(@PathVariable UUID uuid) {
         Project project = service.getById(uuid);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(project);
 
@@ -62,7 +63,7 @@ public class ProjectController {
     }
 
     @DeleteMapping ("/{uuid}")
-    public ResponseEntity<Void> delete(@PathVariable String uuid){
+    public ResponseEntity<Void> delete(@PathVariable UUID uuid){
         service.deleteProject(uuid);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

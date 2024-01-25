@@ -22,6 +22,7 @@ public class Project {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
+    @NotBlank
     private UUID uuid;
 
     @Column (name = "title", nullable = false)
@@ -41,7 +42,6 @@ public class Project {
     private String link;
 
     @Column (name = "image", nullable = false, length = 1000)
-    @NotBlank
     private byte[] image;
 
     @Column (name = "publish_date", nullable = false)

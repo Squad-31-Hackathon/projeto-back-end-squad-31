@@ -1,6 +1,8 @@
 package com.squad31.apiorangeportifolio.Domain.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,24 +25,31 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
+    @NotBlank
     private UUID uuid;
 
     @Column (name = "name", nullable = false)
+    @NotBlank
     private String name;
 
     @Column (name = "last_name", nullable = false)
+    @NotBlank
     private String lastName;
 
     @Column (name = "email", nullable = false)
+    @NotBlank
     private String email;
 
     @Column (name = "password", nullable = false)
+    @NotBlank
     private String password; // Não sei como vai ficar após o spring security
 
     @OneToMany (mappedBy = "user")
+    @NotNull
     private List<Project> projects;
 
     @Column (name = "profile_image", length = 1000)
+    @NotNull
     private byte[] profileImage;
 
     @Override
