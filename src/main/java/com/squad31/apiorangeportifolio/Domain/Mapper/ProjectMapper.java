@@ -27,7 +27,7 @@ public class ProjectMapper {
     public Project mapNewProject(ProjectRequestDTO request) {
 
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+                                  .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         byte[] decodedImage = new byte[0];
 

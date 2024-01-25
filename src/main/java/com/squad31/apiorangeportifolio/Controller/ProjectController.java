@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/project")
@@ -51,8 +52,9 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping (consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping
     public ResponseEntity<ProjectResponseDTO> create(@RequestBody ProjectRequestDTO request){
+
         Project newProject = service.createNewProject(request);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
 
