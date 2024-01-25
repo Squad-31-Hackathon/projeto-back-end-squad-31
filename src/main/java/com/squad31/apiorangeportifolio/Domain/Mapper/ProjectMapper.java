@@ -29,6 +29,7 @@ public class ProjectMapper {
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
                                   .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
+        byte[] decodedImage = Base64.getDecoder().decode(request.image());
 
         return Project.builder()
                 .user(user)
@@ -37,13 +38,13 @@ public class ProjectMapper {
                 .description(request.description())
                 .link(request.link())
                 .publishDate(Date.valueOf(LocalDate.now()))
+                .image(decodedImage)
                 .build();
     }
 
     public static ProjectResponseDTO mapProjectResponse(Project project) {
 
-        // TODO: fazer o controller para resgatar essa imagem
-        String imagePath = "/project/image/%s".formatted(project.getUuid());
+        String encodedImage = Base64.getEncoder().encodeToString(project.getImage());
 
         return new ProjectResponseDTO(
                 project.getUuid().toString(),
@@ -52,8 +53,8 @@ public class ProjectMapper {
                 project.getDescription(),
                 project.getLink(),
                 project.getPublishDate(),
-                project.getUser(),
-                imagePath
+                project.getUser().getUuid().toString(),
+                encodedImage
         );
     }
 

@@ -25,7 +25,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    @NotBlank
+    @NotNull
     private UUID uuid;
 
     @Column (name = "name", nullable = false)
