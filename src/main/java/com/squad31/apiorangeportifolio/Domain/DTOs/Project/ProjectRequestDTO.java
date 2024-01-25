@@ -11,7 +11,7 @@ public record ProjectRequestDTO(
         Set<String> tags,
         String description,
         String link,
-        MultipartFile image
+        String image
 
 ) {
 }
