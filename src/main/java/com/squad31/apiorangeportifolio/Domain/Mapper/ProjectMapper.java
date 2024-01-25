@@ -53,7 +53,7 @@ public class ProjectMapper {
                 project.getDescription(),
                 project.getLink(),
                 project.getPublishDate(),
-                project.getUser().getUuid().toString(),
+                UserMapper.mapFromUserToUserResponse(project.getUser()),
                 encodedImage
         );
     }

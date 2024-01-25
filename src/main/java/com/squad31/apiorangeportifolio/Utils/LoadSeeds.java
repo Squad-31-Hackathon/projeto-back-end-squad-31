@@ -23,11 +23,19 @@ public class LoadSeeds {
         UserRequestDTO adminUser = new UserRequestDTO("user", "admin", "admin@email.com", "admin123");
         User savedUser = userService.create(adminUser);
 
-        Set<String> tags = new HashSet<>();
-        tags.add("UX");
+        Set<String> tags1 = new HashSet<>();
+        tags1.add("UX");
+        tags1.add("UI");
 
-        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags, "projeto teste", "www.projeto.com", "imagem");
+        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags1, "projeto teste", "www.projeto.com", "imagem");
         projectService.createNewProject(projectRequestDTO);
+
+        Set<String> tags2 = new HashSet<>();
+        tags2.add("BACKEND");
+        tags2.add("FRONTEND");
+
+        ProjectRequestDTO projectRequestDTO2 = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste-2", tags2, "projeto teste 2", "www.projeto2.com", "imagem");
+        projectService.createNewProject(projectRequestDTO2);
 
     }
 }

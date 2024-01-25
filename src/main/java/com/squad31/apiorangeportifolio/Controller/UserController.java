@@ -1,8 +1,11 @@
 package com.squad31.apiorangeportifolio.Controller;
 
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
+import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Mapper.UserMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
 import com.squad31.apiorangeportifolio.Domain.Service.UserService;
@@ -26,6 +29,15 @@ public class UserController {
         User user = userService.findById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapFromUserToUserResponse(user));
+    }
+
+    @GetMapping("/projects")
+    public ResponseEntity<List<ProjectResponseDTO>> getAuthenticatedUserProjects() {
+        List<ProjectResponseDTO> projects = userService.getAuthenticatedUserProjects().stream()
+                .map(ProjectMapper::mapProjectResponse)
+                .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 
 }

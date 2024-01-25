@@ -1,5 +1,6 @@
 package com.squad31.apiorangeportifolio.Domain.DTOs.Project;
 
+import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 
 import java.sql.Date;
@@ -13,7 +14,7 @@ public record ProjectResponseDTO(
         String description,
         String link,
         Date publishDate,
-        String ownerId,
+        UserResponseDTO owner,
         String image
 
 ) {
