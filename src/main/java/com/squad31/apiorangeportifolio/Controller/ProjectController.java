@@ -44,6 +44,10 @@ public class ProjectController {
                                                     .map(ProjectMapper::mapProjectResponse)
                                                     .toList();
 
+        if(response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -53,5 +57,11 @@ public class ProjectController {
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping ("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable String uuid){
+        service.deleteProject(uuid);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
