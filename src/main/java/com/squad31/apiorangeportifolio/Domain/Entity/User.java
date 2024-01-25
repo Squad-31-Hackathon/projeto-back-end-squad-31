@@ -25,21 +25,22 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
+    @NotNull
     private UUID uuid;
 
-    @Column (name = "name", nullable = false)
+    @Column (name = "name")
     @NotBlank
     private String name;
 
-    @Column (name = "last_name", nullable = false)
+    @Column (name = "last_name")
     @NotBlank
     private String lastName;
 
-    @Column (name = "email", nullable = false)
+    @Column (name = "email")
     @NotBlank
     private String email;
 
-    @Column (name = "password", nullable = false)
+    @Column (name = "password")
     @NotBlank
     private String password;
 
