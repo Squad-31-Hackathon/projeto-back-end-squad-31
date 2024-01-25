@@ -5,6 +5,8 @@ import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 @Log4j2
 public class UserMapper {
@@ -15,6 +17,7 @@ public class UserMapper {
                 user.getUuid().toString(),
                 user.getName(),
                 user.getLastName(),
-                user.getEmail());
+                user.getEmail(),
+                Arrays.toString(user.getProfileImage()));
     }
 }

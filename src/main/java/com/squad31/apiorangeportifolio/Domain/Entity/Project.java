@@ -26,7 +26,7 @@ public class Project {
     @NotNull
     private UUID uuid;
 
-    @Column (name = "title", nullable = false)
+    @Column (name = "title")
     @NotBlank
     private String title;
 
@@ -38,14 +38,14 @@ public class Project {
     @NotBlank
     private String description;
 
-    @Column (name = "link", nullable = false)
+    @Column (name = "link")
     @NotBlank
     private String link;
 
-    @Column (name = "image", nullable = false, length = 1000000) // 1MB
+    @Column (name = "image", length = 1000000) // 1MB
     private byte[] image;
 
-    @Column (name = "publish_date", nullable = false)
+    @Column (name = "publish_date")
     @NotNull
     private Date publishDate;
 
