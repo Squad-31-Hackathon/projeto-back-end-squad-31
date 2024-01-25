@@ -7,9 +7,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, String> {
+public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
     @Query ("SELECT e FROM Project e WHERE :tag IN elements(e.tags)")
     List<Project> findByTag(@Param("tag") String tag);

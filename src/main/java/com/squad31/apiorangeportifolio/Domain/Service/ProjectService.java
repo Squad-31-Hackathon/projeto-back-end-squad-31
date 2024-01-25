@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Log4j2
@@ -29,7 +30,7 @@ public class ProjectService {
         return repository.findByTag(tag);
     }
 
-    public Project getById(String uuid){
+    public Project getById(UUID uuid){
         return repository.findById(uuid)
                          .orElseThrow(() -> new NotFoundException("Projeto não encontrado"));
     }
@@ -42,7 +43,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public void deleteProject(String uuid){
+    public void deleteProject(UUID uuid){
         repository.deleteById(uuid);
         log.info("Projeto deletado com sucesso");
     }

@@ -27,15 +27,8 @@ public class ProjectMapper {
     public Project mapNewProject(ProjectRequestDTO request) {
 
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+                                  .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        byte[] decodedImage = new byte[0];
-
-        try {
-            decodedImage = request.image().getBytes();
-        } catch (IOException e) {
-            log.error("Erro ao processar imagem");
-        }
 
         return Project.builder()
                 .user(user)
@@ -43,7 +36,6 @@ public class ProjectMapper {
                 .tags(request.tags())
                 .description(request.description())
                 .link(request.link())
-                .image(decodedImage)
                 .publishDate(Date.valueOf(LocalDate.now()))
                 .build();
     }
