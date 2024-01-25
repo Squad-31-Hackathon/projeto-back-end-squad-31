@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -43,21 +44,31 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ProblemDetail handleSecurityException(Exception ex) {
+    public ResponseEntity<ErrorDTO> handleSecurityException(Exception ex) {
         log.error(ex.getMessage());
-        ProblemDetail errorDetail = null;
+        ResponseEntity<ErrorDTO> response = null;
 
         if (ex instanceof BadCredentialsException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), ex.getMessage());
+
+            ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+            response = ResponseEntity.status(401).body(errorResponse);
 
         }
 
         if (ex instanceof AccessDeniedException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), ex.getMessage());
+
+            ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+            response = ResponseEntity.status(403).body(errorResponse);
 
         }
 
-        return errorDetail;
+        if (ex instanceof InternalAuthenticationServiceException) {
+
+            ErrorDTO errorResponse = new ErrorDTO("Usuário inexistente ou senha inválida");
+            response = ResponseEntity.status(401).body(errorResponse);
+        }
+
+        return response;
     }
 
 

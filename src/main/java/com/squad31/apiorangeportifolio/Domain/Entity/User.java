@@ -25,7 +25,6 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    @NotNull
     private UUID uuid;
 
     @Column (name = "name", nullable = false)
@@ -42,14 +41,10 @@ public class User implements UserDetails {
 
     @Column (name = "password", nullable = false)
     @NotBlank
-    private String password; // Não sei como vai ficar após o spring security
-
-    @OneToMany (mappedBy = "user")
-    @NotNull
-    private List<Project> projects;
+    private String password;
 
     @Column (name = "profile_image", length = 1000)
-    @NotNull
+
     private byte[] profileImage;
 
     @Override

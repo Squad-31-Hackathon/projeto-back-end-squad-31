@@ -7,6 +7,7 @@ import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserTokenDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Mapper.UserMapper;
 import com.squad31.apiorangeportifolio.Domain.Service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<UserTokenDTO> login(@RequestBody UserLoginDTO userLoginData) {
+    public ResponseEntity<UserTokenDTO> login(@Valid @RequestBody UserLoginDTO userLoginData) {
 
         String token = authService.login(userLoginData);
 
@@ -31,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRequestDTO userData) {
+    public ResponseEntity<UserResponseDTO> register(@Valid @RequestBody UserRequestDTO userData) {
         User user = authService.register(userData);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.mapFromUserToUserResponse(user));
