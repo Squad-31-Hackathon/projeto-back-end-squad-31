@@ -53,8 +53,10 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping
-    public ResponseEntity<ProjectResponseDTO> create(@RequestBody ProjectRequestDTO request){
+    @PostMapping(consumes = {MediaType.APPLICATION_OCTET_STREAM_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<ProjectResponseDTO> create(@RequestPart ProjectRequestDTO request, @RequestPart MultipartFile file){
+
+        System.out.println(file.getOriginalFilename());
 
         Project newProject = service.createNewProject(request);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
