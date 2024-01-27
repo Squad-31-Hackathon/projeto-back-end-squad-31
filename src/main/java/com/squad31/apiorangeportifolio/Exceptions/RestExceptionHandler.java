@@ -35,6 +35,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
+    @ExceptionHandler(value = InternalServerErrorException.class)
+    private ResponseEntity<ErrorDTO> handleInternalServerErrorException(InternalServerErrorException ex){
+        log.error(ex.getMessage());
+        ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+
     @ExceptionHandler(value = IllegalArgumentException.class)
     private ResponseEntity<ErrorDTO> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error(ex.getMessage());
@@ -45,7 +53,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDTO> handleSecurityException(Exception ex) {
-        ex.printStackTrace();
+        ex.printStackTrace(); // verificar o log pois Exception é muito generalizado
         log.error(ex.getMessage());
         ResponseEntity<ErrorDTO> response = null;
 

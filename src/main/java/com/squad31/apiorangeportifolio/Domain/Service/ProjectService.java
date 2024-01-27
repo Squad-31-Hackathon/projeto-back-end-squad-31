@@ -4,6 +4,7 @@ import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
+import com.squad31.apiorangeportifolio.Exceptions.InternalServerErrorException;
 import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -44,7 +45,7 @@ public class ProjectService {
             log.info("Projeto registrado com sucesso");
             return newProject;
         } catch (IOException e){
-            throw new RuntimeException();
+            throw new InternalServerErrorException("Erro ao processar imagem");
         }
     }
 
