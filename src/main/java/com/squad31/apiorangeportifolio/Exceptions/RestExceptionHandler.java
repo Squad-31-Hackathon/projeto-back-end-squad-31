@@ -45,6 +45,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDTO> handleSecurityException(Exception ex) {
+        ex.printStackTrace();
         log.error(ex.getMessage());
         ResponseEntity<ErrorDTO> response = null;
 

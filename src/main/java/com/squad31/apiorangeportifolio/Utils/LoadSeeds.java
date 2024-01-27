@@ -7,7 +7,9 @@ import com.squad31.apiorangeportifolio.Domain.Service.ProjectService;
 import com.squad31.apiorangeportifolio.Domain.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,15 +29,15 @@ public class LoadSeeds {
         tags1.add("UX");
         tags1.add("UI");
 
-        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags1, "projeto teste", "www.projeto.com", "imagem");
-        projectService.createNewProject(projectRequestDTO);
+        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags1, "projeto teste", "www.projeto.com");
+        projectService.createNewProject(projectRequestDTO, "default_test_image".getBytes(StandardCharsets.UTF_8));
 
         Set<String> tags2 = new HashSet<>();
         tags2.add("BACKEND");
         tags2.add("FRONTEND");
 
-        ProjectRequestDTO projectRequestDTO2 = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste-2", tags2, "projeto teste 2", "www.projeto2.com", "imagem");
-        projectService.createNewProject(projectRequestDTO2);
-
+        ProjectRequestDTO projectRequestDTO2 = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste-2", tags2, "projeto teste 2", "www.projeto2.com");
+        projectService.createNewProject(projectRequestDTO2, "default_test_image".getBytes(StandardCharsets.UTF_8));
+        System.out.println("User id for tests: " + savedUser.getUuid());
     }
 }
