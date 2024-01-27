@@ -61,4 +61,8 @@ public class UserService {
 
         return projectRepository.findByUser(user);
     }
+
+    public void deleteUser(UUID uuid){
+        userRepository.deleteById(uuid);
+    }
 }
