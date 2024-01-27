@@ -33,7 +33,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping ("/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseEntity<ProjectResponseDTO> getById(@PathVariable UUID uuid) {
         Project project = service.getById(uuid);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(project);
@@ -41,7 +41,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping ("/tag/{tag}")
+    @GetMapping("/tag/{tag}")
     public ResponseEntity<List<ProjectResponseDTO>> getByTag(@PathVariable String tag) {
         List<ProjectResponseDTO> response = service.getByTag(tag).stream()
                                                     .map(ProjectMapper::mapProjectResponse)
@@ -50,6 +50,13 @@ public class ProjectController {
         if(response.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
         }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("tags")
+    public ResponseEntity<List<String>> getAvaiableTags(){
+        List<String> response = service.getAvaiableTags();
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -64,7 +71,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @DeleteMapping ("/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> delete(@PathVariable UUID uuid){
         service.deleteProject(uuid);
         return ResponseEntity.status(HttpStatus.OK).build();

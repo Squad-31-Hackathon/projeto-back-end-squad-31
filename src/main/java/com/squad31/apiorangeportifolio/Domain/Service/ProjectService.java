@@ -25,6 +25,10 @@ public class ProjectService {
     @Autowired
     private ProjectMapper mapper;
 
+    public List<String> getAvaiableTags(){
+        return repository.getAvailableTags();
+    }
+
     public List<Project> getAllProjects(){
         return repository.findAll();
     }
