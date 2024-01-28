@@ -10,8 +10,7 @@ public record ProjectRequestDTO(
         String title,
         Set<String> tags,
         String description,
-        String link,
-        String image
+        String link
 
 ) {
 }

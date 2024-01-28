@@ -15,7 +15,7 @@ public record ProjectResponseDTO(
         String link,
         Date publishDate,
         UserResponseDTO owner,
-        String image
+        byte[] image
 
 ) {
 }

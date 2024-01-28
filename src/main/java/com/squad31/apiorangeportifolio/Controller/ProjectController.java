@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping ("/{id}")
+    @GetMapping ("/{uuid}")
     public ResponseEntity<ProjectResponseDTO> getById(@PathVariable UUID uuid) {
         Project project = service.getById(uuid);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(project);
@@ -41,7 +42,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping ("/{tag}")
+    @GetMapping ("/tag/{tag}")
     public ResponseEntity<List<ProjectResponseDTO>> getByTag(@PathVariable String tag) {
         List<ProjectResponseDTO> response = service.getByTag(tag).stream()
                                                     .map(ProjectMapper::mapProjectResponse)
@@ -54,10 +55,11 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping
-    public ResponseEntity<ProjectResponseDTO> create(@RequestBody ProjectRequestDTO request){
+    @PostMapping(consumes = {MediaType.APPLICATION_OCTET_STREAM_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<ProjectResponseDTO> create(@RequestPart ProjectRequestDTO request,
+                                                   @RequestPart MultipartFile file) throws IOException {
 
-        Project newProject = service.createNewProject(request);
+        Project newProject = service.createNewProject(request, file.getBytes());
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

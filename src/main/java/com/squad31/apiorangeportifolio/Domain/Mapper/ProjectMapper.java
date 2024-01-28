@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Base64;
@@ -24,12 +25,12 @@ public class ProjectMapper {
     @Autowired
     private UserRepository userRepository;
 
-    public Project mapNewProject(ProjectRequestDTO request) {
+    public Project mapNewProject(ProjectRequestDTO request, byte[] image) throws IOException {
 
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
                                   .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        byte[] decodedImage = Base64.getDecoder().decode(request.image());
+
 
         return Project.builder()
                 .user(user)
@@ -38,7 +39,7 @@ public class ProjectMapper {
                 .description(request.description())
                 .link(request.link())
                 .publishDate(Date.valueOf(LocalDate.now()))
-                .image(decodedImage)
+                .image(image)
                 .build();
     }
 
@@ -54,7 +55,7 @@ public class ProjectMapper {
                 project.getLink(),
                 project.getPublishDate(),
                 UserMapper.mapFromUserToUserResponse(project.getUser()),
-                encodedImage
+                project.getImage()
         );
     }
 

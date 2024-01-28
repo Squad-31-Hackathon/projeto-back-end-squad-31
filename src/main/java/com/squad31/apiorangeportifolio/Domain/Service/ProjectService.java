@@ -5,12 +5,15 @@ import com.squad31.apiorangeportifolio.Domain.DTOs.Project.TagResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
+import com.squad31.apiorangeportifolio.Exceptions.InternalServerErrorException;
 import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,10 +40,14 @@ public class ProjectService {
     }
 
     @Transactional
-    public Project createNewProject(ProjectRequestDTO request){
-        Project newProject = repository.save(mapper.mapNewProject(request));
-        log.info("Projeto registrado com sucesso");
-        return newProject;
+    public Project createNewProject(ProjectRequestDTO request, byte[] image){
+        try {
+            Project newProject = repository.save(mapper.mapNewProject(request, image));
+            log.info("Projeto registrado com sucesso");
+            return newProject;
+        } catch (IOException e){
+            throw new InternalServerErrorException("Erro ao processar imagem");
+        }
     }
 
     @Transactional
