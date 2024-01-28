@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @SecurityRequirement(name = "token")
+@Log4j2
 public class UserController {
 
     @Autowired
@@ -49,10 +51,12 @@ public class UserController {
     })
     @GetMapping("/projects")
     public ResponseEntity<List<ProjectResponseDTO>> getAuthenticatedUserProjects() {
+        log.info("Buscando projetos do usuário logado");
         List<ProjectResponseDTO> projects = userService.getAuthenticatedUserProjects().stream()
                 .map(ProjectMapper::mapProjectResponse)
                 .toList();
 
+        log.info("Retornando projetos do usuário logado");
         return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 

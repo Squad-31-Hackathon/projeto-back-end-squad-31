@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Log4j2
 public class AuthController {
 
     @Autowired
@@ -36,7 +38,7 @@ public class AuthController {
     })
     @PostMapping("/login")
     public ResponseEntity<UserTokenDTO> login(@Valid @RequestBody UserLoginDTO userLoginData) {
-
+        log.info("Inicando autenticação de usuário");
         String token = authService.login(userLoginData);
 
         return ResponseEntity.status(HttpStatus.OK).body(new UserTokenDTO(token));
@@ -49,8 +51,10 @@ public class AuthController {
     })
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> register(@Valid @RequestBody UserRequestDTO userData) {
+        log.info("Inicando registro de usuário");
         User user = authService.register(userData);
 
+        log.info("Usuário cadastrado com sucesso");
         return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.mapFromUserToUserResponse(user));
     }
 }
