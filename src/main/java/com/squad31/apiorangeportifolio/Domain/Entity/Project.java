@@ -43,6 +43,7 @@ public class Project {
     private String link;
 
     @Column (name = "image", length = 1000000) // 1MB
+    @NotNull
     private byte[] image;
 
     @Column (name = "publish_date")

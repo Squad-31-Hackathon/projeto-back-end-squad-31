@@ -1,10 +1,8 @@
 package com.squad31.apiorangeportifolio.Exceptions;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -26,17 +24,24 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
-
-    @ExceptionHandler(value = NotFoundException.class)
-    private ResponseEntity<ErrorDTO> handleNotFoundException(NotFoundException ex) {
+    @ExceptionHandler(value = ProjectNotFoundException.class)
+    private ResponseEntity<ErrorDTO> handleProjectNotFoundException(ProjectNotFoundException ex) {
         log.error(ex.getMessage());
         ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(value = InternalServerErrorException.class)
-    private ResponseEntity<ErrorDTO> handleInternalServerErrorException(InternalServerErrorException ex){
+    @ExceptionHandler(value = UserNotFoundException.class)
+    private ResponseEntity<ErrorDTO> handleUserNotFoundException(UserNotFoundException ex){
+        log.error(ex.getMessage());
+        ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = ImageProcessingException.class)
+    private ResponseEntity<ErrorDTO> handleImageProcessingException(ImageProcessingException ex){
         log.error(ex.getMessage());
         ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
 
@@ -47,6 +52,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<ErrorDTO> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error(ex.getMessage());
         ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    private ResponseEntity<ErrorDTO> handleValidationException(ConstraintViolationException ex){
+        log.error(ex.getMessage());
+        ErrorDTO errorResponse = new ErrorDTO(ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = BadCredentialsException.class)
+    private ResponseEntity<ErrorDTO> handleBadCredentialsException(BadCredentialsException ex){
+        log.error("Credenciais incorretas - {}", ex.getMessage());
+        ErrorDTO errorResponse = new ErrorDTO("Credenciais incorretas");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }

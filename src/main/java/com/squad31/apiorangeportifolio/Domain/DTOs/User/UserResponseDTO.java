@@ -1,6 +1,4 @@
-package com.squad31.apiorangeportifolio.Domain.DTOs.user;
-
-import java.util.UUID;
+package com.squad31.apiorangeportifolio.Domain.DTOs.User;
 
 public record UserResponseDTO(
 

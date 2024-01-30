@@ -1,12 +1,13 @@
 package com.squad31.apiorangeportifolio.Domain.Service;
 
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
 import com.squad31.apiorangeportifolio.Exceptions.BadRequestException;
-import com.squad31.apiorangeportifolio.Exceptions.NotFoundException;
+import com.squad31.apiorangeportifolio.Exceptions.ProjectNotFoundException;
+import com.squad31.apiorangeportifolio.Exceptions.UserNotFoundException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(UUID.fromString(uuid));
 
         if (user.isEmpty()) {
-            throw new NotFoundException("Usuário com este ID não encontrado");
+            throw new UserNotFoundException();
         }
 
         return user.get();

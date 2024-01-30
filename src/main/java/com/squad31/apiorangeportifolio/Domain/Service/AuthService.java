@@ -1,7 +1,7 @@
 package com.squad31.apiorangeportifolio.Domain.Service;
 
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserLoginDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserLoginDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
 import lombok.extern.log4j.Log4j2;

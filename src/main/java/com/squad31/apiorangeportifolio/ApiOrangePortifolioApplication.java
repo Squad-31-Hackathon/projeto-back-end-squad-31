@@ -1,9 +1,5 @@
 package com.squad31.apiorangeportifolio;
 
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
-import com.squad31.apiorangeportifolio.Domain.Entity.User;
-import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
-import com.squad31.apiorangeportifolio.Domain.Service.UserService;
 import com.squad31.apiorangeportifolio.Utils.LoadSeeds;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

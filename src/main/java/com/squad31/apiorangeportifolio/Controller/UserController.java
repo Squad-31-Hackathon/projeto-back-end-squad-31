@@ -1,13 +1,10 @@
 package com.squad31.apiorangeportifolio.Controller;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
-import com.squad31.apiorangeportifolio.Domain.Entity.Project;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Mapper.UserMapper;
-import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
 import com.squad31.apiorangeportifolio.Domain.Service.UserService;
 import com.squad31.apiorangeportifolio.Exceptions.ErrorDTO;
 import io.swagger.v3.oas.annotations.Operation;
