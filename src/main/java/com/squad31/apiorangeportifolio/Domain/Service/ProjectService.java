@@ -1,6 +1,7 @@
 package com.squad31.apiorangeportifolio.Domain.Service;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.TagResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
@@ -52,6 +53,10 @@ public class ProjectService {
     public void deleteProject(UUID uuid){
         repository.deleteById(uuid);
         log.info("Projeto deletado com sucesso");
+    }
+
+    public List<String> getAllTags() {
+        return repository.getTags();
     }
 
 }

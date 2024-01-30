@@ -17,4 +17,8 @@ public interface ProjectRepository extends JpaRepository<Project, UUID> {
     List<Project> findByTag(@Param("tag") String tag);
 
     List<Project> findByUser(User user);
+
+    @Query(value = "SELECT tags from project_tags",
+    nativeQuery = true)
+    List<String> getTags();
 }

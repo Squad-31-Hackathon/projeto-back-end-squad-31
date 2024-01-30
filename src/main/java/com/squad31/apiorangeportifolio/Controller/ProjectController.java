@@ -2,6 +2,7 @@ package com.squad31.apiorangeportifolio.Controller;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.TagResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,13 @@ public class ProjectController {
     public ResponseEntity<Void> delete(@PathVariable UUID uuid){
         service.deleteProject(uuid);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/tags")
+    public ResponseEntity<List<TagResponseDTO>> getTags() {
+
+        List<String> tags = service.getAllTags();
+
+        return ResponseEntity.status(HttpStatus.OK).body(tags.stream().map(TagResponseDTO::new).toList());
     }
 }
