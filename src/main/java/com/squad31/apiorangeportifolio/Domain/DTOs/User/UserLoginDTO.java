@@ -1,4 +1,4 @@
-package com.squad31.apiorangeportifolio.Domain.DTOs.user;
+package com.squad31.apiorangeportifolio.Domain.DTOs.User;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

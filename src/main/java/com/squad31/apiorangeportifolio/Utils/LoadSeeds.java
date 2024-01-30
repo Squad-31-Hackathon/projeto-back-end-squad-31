@@ -1,7 +1,7 @@
 package com.squad31.apiorangeportifolio.Utils;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Service.ProjectService;

@@ -1,13 +1,7 @@
-package com.squad31.apiorangeportifolio.Domain.DTOs.user;
+package com.squad31.apiorangeportifolio.Domain.DTOs.User;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-
 
 
 public record UserRequestDTO (@NotBlank(message = "Usuário deve conter nome")

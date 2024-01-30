@@ -45,7 +45,6 @@ public class User implements UserDetails {
     private String password;
 
     @Column (name = "profile_image", length = 1000)
-
     private byte[] profileImage;
 
     @Override

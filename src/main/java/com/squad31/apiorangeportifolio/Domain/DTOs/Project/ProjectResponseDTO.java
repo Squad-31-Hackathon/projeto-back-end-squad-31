@@ -1,7 +1,6 @@
 package com.squad31.apiorangeportifolio.Domain.DTOs.Project;
 
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
-import com.squad31.apiorangeportifolio.Domain.Entity.User;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserResponseDTO;
 
 import java.sql.Date;
 import java.util.Set;
