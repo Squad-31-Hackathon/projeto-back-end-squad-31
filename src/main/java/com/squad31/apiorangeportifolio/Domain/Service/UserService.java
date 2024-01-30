@@ -67,6 +67,11 @@ public class UserService {
         return projectRepository.findByUser(user);
     }
 
+    public User getAuthenticatedUserInfo() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    }
+
     public void deleteUser(UUID uuid){
         userRepository.deleteById(uuid);
     }
