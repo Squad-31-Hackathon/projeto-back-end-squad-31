@@ -17,20 +17,11 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "api-squad-31", version = "1.0", description = "API Squad-31"))
 @SecurityScheme(name = "token", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
-public class ApiOrangePortifolioApplication implements ApplicationRunner {
-
-	@Autowired
-	private LoadSeeds loadSeeds;
-
+public class ApiOrangePortifolioApplication  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiOrangePortifolioApplication.class, args);
 	}
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
 
-		loadSeeds.loadUsers();
-
-	}
 }

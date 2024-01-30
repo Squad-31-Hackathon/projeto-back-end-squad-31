@@ -57,4 +57,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 
+    @Operation(summary = "Realiza a consulta das informações do usuário logado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso"),
+
+    })
+    @GetMapping()
+    public ResponseEntity<UserResponseDTO> findAuthenticatedUserInfo() {
+        User user = userService.getAuthenticatedUserInfo();
+
+        return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapFromUserToUserResponse(user));
+    }
+
 }
