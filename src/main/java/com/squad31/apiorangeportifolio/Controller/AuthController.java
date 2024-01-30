@@ -1,9 +1,9 @@
 package com.squad31.apiorangeportifolio.Controller;
 
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserLoginDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserRequestDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserResponseDTO;
-import com.squad31.apiorangeportifolio.Domain.DTOs.user.UserTokenDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserLoginDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserRequestDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.User.UserTokenDTO;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Mapper.UserMapper;
 import com.squad31.apiorangeportifolio.Domain.Service.AuthService;
