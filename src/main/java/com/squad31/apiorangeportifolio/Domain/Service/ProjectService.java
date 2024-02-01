@@ -39,14 +39,12 @@ public class ProjectService {
     }
 
     @Transactional
-    public Project createNewProject(ProjectRequestDTO request, byte[] image){
-        try {
-            Project newProject = repository.save(mapper.mapNewProject(request, image));
+    public Project createNewProject(ProjectRequestDTO request){
+
+            Project newProject = repository.save(mapper.mapNewProject(request));
             log.info("Projeto registrado com sucesso");
             return newProject;
-        } catch (IOException e){
-            throw new ImageProcessingException();
-        }
+
     }
 
     @Transactional

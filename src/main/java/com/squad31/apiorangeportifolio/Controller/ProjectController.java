@@ -55,11 +55,10 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_OCTET_STREAM_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ProjectResponseDTO> create(@RequestPart ProjectRequestDTO request,
-                                                   @RequestPart MultipartFile file) throws IOException {
+    @PostMapping()
+    public ResponseEntity<ProjectResponseDTO> create(@RequestBody ProjectRequestDTO request) {
 
-        Project newProject = service.createNewProject(request, file.getBytes());
+        Project newProject = service.createNewProject(request);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(newProject);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

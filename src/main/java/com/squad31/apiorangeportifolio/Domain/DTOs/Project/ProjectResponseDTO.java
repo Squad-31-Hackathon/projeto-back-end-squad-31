@@ -13,8 +13,8 @@ public record ProjectResponseDTO(
         String description,
         String link,
         Date publishDate,
-        UserResponseDTO owner,
-        byte[] image
+        UserResponseDTO owner
+
 
 ) {
 }

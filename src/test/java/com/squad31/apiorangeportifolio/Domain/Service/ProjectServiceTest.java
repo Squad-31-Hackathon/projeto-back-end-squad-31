@@ -72,12 +72,12 @@ class ProjectServiceTest {
     @Test
     void shouldReturnAProjectEntityWhenANewProjectIsSaved() throws IOException {
 
-        Mockito.when(projectMapper.mapNewProject(ProjectTestUtils.ValidProjectDTO(), "imagem".getBytes(StandardCharsets.UTF_8)))
+        Mockito.when(projectMapper.mapNewProject(ProjectTestUtils.ValidProjectDTO()))
                 .thenReturn(ProjectTestUtils.ValidProject());
         Mockito.when(projectRepository.save(Mockito.any(Project.class)))
                 .thenReturn(ProjectTestUtils.ValidProject());
 
-        Project project = projectService.createNewProject(ProjectTestUtils.ValidProjectDTO(), "imagem".getBytes(StandardCharsets.UTF_8));
+        Project project = projectService.createNewProject(ProjectTestUtils.ValidProjectDTO());
 
         assertNotNull(project);
         assertEquals(ProjectTestUtils.ValidProject(), project);

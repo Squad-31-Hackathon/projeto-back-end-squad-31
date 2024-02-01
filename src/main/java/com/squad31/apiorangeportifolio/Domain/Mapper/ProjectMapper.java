@@ -25,7 +25,7 @@ public class ProjectMapper {
     @Autowired
     private UserRepository userRepository;
 
-    public Project mapNewProject(ProjectRequestDTO request, byte[] image) throws IOException {
+    public Project mapNewProject(ProjectRequestDTO request) {
 
         User user = userRepository.findById(UUID.fromString(request.userUuid()))
                 .orElseThrow(ProjectNotFoundException::new);
@@ -38,13 +38,12 @@ public class ProjectMapper {
                 .description(request.description())
                 .link(request.link())
                 .publishDate(Date.valueOf(LocalDate.now()))
-                .image(ImageUtils.compressImage(image))
                 .build();
     }
 
     public static ProjectResponseDTO mapProjectResponse(Project project) {
 
-        try {
+
             return new ProjectResponseDTO(
                     project.getUuid().toString(),
                     project.getTitle(),
@@ -52,12 +51,9 @@ public class ProjectMapper {
                     project.getDescription(),
                     project.getLink(),
                     project.getPublishDate(),
-                    UserMapper.mapFromUserToUserResponse(project.getUser()),
-                    ImageUtils.decompressImage(project.getImage())
+                    UserMapper.mapFromUserToUserResponse(project.getUser())
             );
-        } catch (DataFormatException | IOException e) {
-            throw new ImageProcessingException();
-        }
+
     }
 
 }
