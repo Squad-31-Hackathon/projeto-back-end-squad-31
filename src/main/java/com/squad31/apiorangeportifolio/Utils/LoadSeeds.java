@@ -50,24 +50,24 @@ public class LoadSeeds {
         System.out.println("User id for tests: " + savedUser.getUuid());
     }
 
-    @Component
-    class ShutdownListener implements ApplicationListener<ContextClosedEvent> {
-        @Override
-        public void onApplicationEvent(ContextClosedEvent event) {
-            projectService.deleteProject(savedProject1.getUuid());
-            projectService.deleteProject(savedProject2.getUuid());
-            userService.deleteUser(savedUser.getUuid());
-
-            log.info("Entidades de testes excluídas, finalizando o serviço de persitência");
-
-        }
-
-        @Override
-        public boolean supportsAsyncExecution() {
-            return ApplicationListener.super.supportsAsyncExecution();
-        }
-
-    }
+//    @Component
+//    class ShutdownListener implements ApplicationListener<ContextClosedEvent> {
+//        @Override
+//        public void onApplicationEvent(ContextClosedEvent event) {
+//            projectService.deleteProject(savedProject1.getUuid());
+//            projectService.deleteProject(savedProject2.getUuid());
+//            userService.deleteUser(savedUser.getUuid());
+//
+//            log.info("Entidades de testes excluídas, finalizando o serviço de persitência");
+//
+//        }
+//
+//        @Override
+//        public boolean supportsAsyncExecution() {
+//            return ApplicationListener.super.supportsAsyncExecution();
+//        }
+//
+//    }
 
 }
 
