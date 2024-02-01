@@ -34,7 +34,7 @@ class ProjectMapperTest {
 
         Mockito.when(userRepository.findById(Mockito.any(UUID.class))).thenThrow(UserNotFoundException.class);
 
-        assertThrows(UserNotFoundException.class, () -> projectMapper.mapNewProject(ProjectTestUtils.InvalidUserProjectDTO(), "imagem".getBytes(StandardCharsets.UTF_8)));
+        assertThrows(UserNotFoundException.class, () -> projectMapper.mapNewProject(ProjectTestUtils.InvalidUserProjectDTO()));
 
     }
 

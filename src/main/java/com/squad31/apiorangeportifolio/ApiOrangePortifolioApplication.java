@@ -17,11 +17,24 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "api-squad-31", version = "1.0", description = "API Squad-31"))
 @SecurityScheme(name = "token", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
+<<<<<<< Updated upstream
 public class ApiOrangePortifolioApplication  {
+=======
+public class ApiOrangePortifolioApplication implements ApplicationRunner {
+
+
+
+>>>>>>> Stashed changes
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiOrangePortifolioApplication.class, args);
 	}
 
 
+<<<<<<< Updated upstream
+=======
+
+
+	}
+>>>>>>> Stashed changes
 }
