@@ -24,7 +24,6 @@ public class ProjectTestUtils {
                 .description("descrição do projeto")
                 .link("link do projeto")
                 .publishDate(Date.valueOf(LocalDate.now()))
-                .image("imagem".getBytes(StandardCharsets.UTF_8))
                 .user(User.builder()
                         .uuid(userUUID)
                         .name("Usuário")
