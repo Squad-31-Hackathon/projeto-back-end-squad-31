@@ -59,13 +59,13 @@ public class ProjectService {
         return repository.getTags();
     }
 
-    public Project updateProject(String uuid, UpdateProjectRequest ProjectU, byte[] image){
+    public Project updateProject(String uuid, UpdateProjectRequest ProjectU){
         try {
 
             Project projectForUpdate = repository.findById(UUID.fromString(uuid))
                     .orElseThrow(ProjectNotFoundException::new);
 
-            Project updatedProject = mapper.mapUpdateProject(ProjectU, image);
+            Project updatedProject = mapper.mapUpdateProject(ProjectU);
 
             BeanUtils.copyProperties(updatedProject, projectForUpdate, "uuid", "publishDate", "user");
 

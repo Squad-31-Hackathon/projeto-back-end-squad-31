@@ -8,7 +8,8 @@ public record UpdateProjectRequest(
         String title,
         Set<String> tags,
         String description,
-        String link
+        String link,
+        String image
 
 ) {
 }

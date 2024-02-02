@@ -80,9 +80,9 @@ public class ProjectController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<ProjectResponseDTO> updateProject(@PathVariable String uuid, @RequestPart UpdateProjectRequest request, @RequestPart MultipartFile file) throws IOException {
+    public ResponseEntity<ProjectResponseDTO> updateProject(@PathVariable String uuid, @RequestBody UpdateProjectRequest request){
 
-        Project updatedProject = service.updateProject(uuid, request, file.getBytes());
+        Project updatedProject = service.updateProject(uuid, request);
         ProjectResponseDTO response = ProjectMapper.mapProjectResponse(updatedProject);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
