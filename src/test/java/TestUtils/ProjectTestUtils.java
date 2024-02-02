@@ -41,7 +41,8 @@ public class ProjectTestUtils {
         return new ProjectRequestDTO(userUUID.toString(),
                 "título do projeto", Set.of("UX, UI"),
                 "descrição do projeto",
-                    "link do projeto"
+                    "link do projeto",
+                "teste"
                 );
     }
 
@@ -50,7 +51,8 @@ public class ProjectTestUtils {
         return new ProjectRequestDTO(UUID.randomUUID().toString(),
                 "título do projeto", Set.of("UX, UI"),
                 "descrição do projeto",
-                "link do projeto"
+                "link do projeto",
+                "teste"
         );
     }
 
