@@ -40,12 +40,15 @@ public class Project {
 
     @Column (name = "link")
     @NotBlank
-    @Lob
     private String link;
 
     @Column (name = "publish_date")
     @NotNull
     private Date publishDate;
+
+    @Column (name = "image")
+    @Lob
+    private String image;
 
     @ManyToOne
     @JoinColumn (name = "user_uuid", nullable = false)
