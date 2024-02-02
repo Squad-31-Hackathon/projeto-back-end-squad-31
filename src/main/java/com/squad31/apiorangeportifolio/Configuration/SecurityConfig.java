@@ -41,6 +41,7 @@ public class SecurityConfig {
                             .requestMatchers("/h2/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/user/email/*").permitAll()
                             //TODO: Todas as rotas liberadas, ativar quando necessário
                             .anyRequest().authenticated()
                     )
@@ -56,6 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/h2/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/email/*").permitAll()
                         //TODO: Todas as rotas liberadas, ativar quando necessário
                         .anyRequest().permitAll()
                 )
