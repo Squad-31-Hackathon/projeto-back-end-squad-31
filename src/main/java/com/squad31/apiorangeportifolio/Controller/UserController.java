@@ -42,6 +42,18 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(UserMapper.mapFromUserToUserResponse(user));
     }
+
+    @Operation(summary = "Realiza a consulta de um usuário pelo seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário com este ID não encontrado", content = {@Content(schema = @Schema(implementation = ErrorDTO.class))})
+    })
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Void> findByEmail(@PathVariable String email) {
+        userService.findByEmail(email);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
     @Operation(summary = "Realiza a consulta dos projetos do usuário autenticado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Projetos encontrados com sucesso"),

@@ -2,6 +2,7 @@ package com.squad31.apiorangeportifolio.Configuration;
 
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
 import com.squad31.apiorangeportifolio.Domain.Service.TokenService;
+import com.squad31.apiorangeportifolio.Utils.GoogleLoginService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -24,13 +26,19 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private GoogleLoginService googleLoginService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String token = this.recoverToken(request);
 
+        String clientId = request.getHeader("ClientId");
+
+
         if (token != null) {
-            String email = tokenService.validateToken(token);
+            String email = clientId == null ? tokenService.validateToken(token): googleLoginService.validate(token, clientId);
             UserDetails user = userRepository.findByEmail(email);
 
             if (user != null) {
