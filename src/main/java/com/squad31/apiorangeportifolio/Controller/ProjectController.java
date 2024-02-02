@@ -3,6 +3,7 @@ package com.squad31.apiorangeportifolio.Controller;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.TagResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.UpdateProjectRequest;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,15 @@ public class ProjectController {
         List<String> tags = service.getAllTags();
 
         return ResponseEntity.status(HttpStatus.OK).body(tags.stream().map(TagResponseDTO::new).toList());
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<ProjectResponseDTO> updateProject(@PathVariable String uuid, @RequestPart UpdateProjectRequest request, @RequestPart MultipartFile file) throws IOException {
+
+        Project updatedProject = service.updateProject(uuid, request, file.getBytes());
+        ProjectResponseDTO response = ProjectMapper.mapProjectResponse(updatedProject);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 }
