@@ -59,14 +59,14 @@ public class ProjectMapper {
 
     }
 
-    public Project mapUpdateProject(UpdateProjectRequest updateProjectRequest, byte[] image) throws IOException {
+    public Project mapUpdateProject(UpdateProjectRequest updateProjectRequest) throws IOException {
 
         return Project.builder()
                 .title(updateProjectRequest.title())
                 .tags(updateProjectRequest.tags())
                 .description(updateProjectRequest.description())
                 .link(updateProjectRequest.link())
-                .image(ImageUtils.compressImage(image))
+                .image(updateProjectRequest.image())
                 .build();
 
     }
