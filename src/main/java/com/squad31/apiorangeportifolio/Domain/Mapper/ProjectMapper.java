@@ -2,6 +2,7 @@ package com.squad31.apiorangeportifolio.Domain.Mapper;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.UpdateProjectRequest;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Entity.User;
 import com.squad31.apiorangeportifolio.Domain.Repository.UserRepository;
@@ -55,6 +56,18 @@ public class ProjectMapper {
                     project.getImage(),
                     UserMapper.mapFromUserToUserResponse(project.getUser())
             );
+
+    }
+
+    public Project mapUpdateProject(UpdateProjectRequest updateProjectRequest, byte[] image) throws IOException {
+
+        return Project.builder()
+                .title(updateProjectRequest.title())
+                .tags(updateProjectRequest.tags())
+                .description(updateProjectRequest.description())
+                .link(updateProjectRequest.link())
+                .image(ImageUtils.compressImage(image))
+                .build();
 
     }
 

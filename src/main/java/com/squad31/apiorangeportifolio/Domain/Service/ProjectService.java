@@ -2,6 +2,7 @@ package com.squad31.apiorangeportifolio.Domain.Service;
 
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.ProjectRequestDTO;
 import com.squad31.apiorangeportifolio.Domain.DTOs.Project.TagResponseDTO;
+import com.squad31.apiorangeportifolio.Domain.DTOs.Project.UpdateProjectRequest;
 import com.squad31.apiorangeportifolio.Domain.Entity.Project;
 import com.squad31.apiorangeportifolio.Domain.Mapper.ProjectMapper;
 import com.squad31.apiorangeportifolio.Domain.Repository.ProjectRepository;
@@ -9,6 +10,7 @@ import com.squad31.apiorangeportifolio.Exceptions.ImageProcessingException;
 import com.squad31.apiorangeportifolio.Exceptions.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,24 @@ public class ProjectService {
 
     public List<String> getAllTags() {
         return repository.getTags();
+    }
+
+    public Project updateProject(String uuid, UpdateProjectRequest ProjectU, byte[] image){
+        try {
+
+            Project projectForUpdate = repository.findById(UUID.fromString(uuid))
+                    .orElseThrow(ProjectNotFoundException::new);
+
+            Project updatedProject = mapper.mapUpdateProject(ProjectU, image);
+
+            BeanUtils.copyProperties(updatedProject, projectForUpdate, "uuid", "publishDate", "user");
+
+            Project projectReturned = repository.save(projectForUpdate);
+            log.info("Projeto {} atualizado com sucesso", projectReturned.getUuid());
+            return projectReturned;
+        } catch (IOException e){
+            throw new ImageProcessingException();
+        }
     }
 
 }
