@@ -13,7 +13,12 @@ public record ProjectResponseDTO(
         String description,
         String link,
         Date publishDate,
+
+        String image,
+
         UserResponseDTO owner
+
+
 
 
 ) {

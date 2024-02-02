@@ -38,6 +38,7 @@ public class ProjectMapper {
                 .description(request.description())
                 .link(request.link())
                 .publishDate(Date.valueOf(LocalDate.now()))
+                .image(request.image())
                 .build();
     }
 
@@ -51,6 +52,7 @@ public class ProjectMapper {
                     project.getDescription(),
                     project.getLink(),
                     project.getPublishDate(),
+                    project.getImage(),
                     UserMapper.mapFromUserToUserResponse(project.getUser())
             );
 

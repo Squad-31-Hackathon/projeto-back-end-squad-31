@@ -37,14 +37,14 @@ public class LoadSeeds {
         tags1.add("UX");
         tags1.add("UI");
 
-        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags1, "projeto teste", "www.projeto.com");
+        ProjectRequestDTO projectRequestDTO = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste", tags1, "projeto teste", "www.projeto.com", "teste");
         savedProject1 = projectService.createNewProject(projectRequestDTO);
 
         Set<String> tags2 = new HashSet<>();
         tags2.add("BACKEND");
         tags2.add("FRONTEND");
 
-        ProjectRequestDTO projectRequestDTO2 = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste-2", tags2, "projeto teste 2", "www.projeto2.com");
+        ProjectRequestDTO projectRequestDTO2 = new ProjectRequestDTO(savedUser.getUuid().toString(), "projeto-teste-2", tags2, "projeto teste 2", "www.projeto2.com", "teste");
         savedProject2 = projectService.createNewProject(projectRequestDTO2);
 
         System.out.println("User id for tests: " + savedUser.getUuid());
