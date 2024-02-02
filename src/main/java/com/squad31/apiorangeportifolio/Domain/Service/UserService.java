@@ -12,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,17 @@ public class UserService {
         }
 
         return user.get();
+
+    }
+
+    public User findByEmail(String email) {
+        UserDetails user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+
+        return (User) user;
 
     }
 
