@@ -43,6 +43,7 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                             .requestMatchers(HttpMethod.GET, "/user/email/*").permitAll()
                             .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
                             .anyRequest().authenticated()
                     )
                     .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
