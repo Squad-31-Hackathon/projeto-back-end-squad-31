@@ -42,7 +42,7 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                             .requestMatchers(HttpMethod.GET, "/user/email/*").permitAll()
-                            //TODO: Todas as rotas liberadas, ativar quando necessário
+                            .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
                             .anyRequest().authenticated()
                     )
                     .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
@@ -58,7 +58,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user/email/*").permitAll()
-                        //TODO: Todas as rotas liberadas, ativar quando necessário
+                        .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
                         .anyRequest().permitAll()
                 )
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
