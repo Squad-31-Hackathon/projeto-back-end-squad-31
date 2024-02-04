@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,8 +45,7 @@ public class Project {
     @NotNull
     private Date publishDate;
 
-    @Column (name = "image")
-    @Lob
+    @Column (name = "image", columnDefinition = "CLOB")
     private String image;
 
     @ManyToOne
